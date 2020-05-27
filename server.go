@@ -152,9 +152,10 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		s.socketChan <- conn
 	}
 	http.SetCookie(w, &http.Cookie{
-		Name:   s.config.Cookie,
-		Value:  sid,
-		Secure: true,
+		Name:     s.config.Cookie,
+		Value:    sid,
+		Secure:   true,
+		HttpOnly: true,
 	})
 
 	conn.(*serverConn).ServeHTTP(w, r)
